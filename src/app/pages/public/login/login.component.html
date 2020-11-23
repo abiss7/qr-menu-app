@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" novalidate="novalidate" (submit)="signIn()">
+<form [formGroup]="formGroup" novalidate="novalidate" (submit)="signIn($event)">
     <div class="form-group">
       <label for="username">Usuario</label>
       <input 
@@ -7,6 +7,12 @@
         id="username" 
         formControlName="username"
       >
+      <div *ngIf="(formGroup.get('username').dirty || formGroup.get('username').touched) && formGroup.get('username').errors?.required" class="alert alert-danger" role="alert">
+        El usuario es obligatorio
+      </div>
+      <div *ngIf="formGroup.get('username').errors?.maxlength" class="alert alert-danger" role="alert">
+        Se ha excedido de caracteres permitidos
+      </div>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
@@ -16,6 +22,18 @@
         class="form-control" 
         id="password"
       >
+      <div *ngIf="(formGroup.get('password').dirty || formGroup.get('password').touched) && formGroup.get('password').errors?.required" class="alert alert-danger" role="alert">
+        La clave es obligatoria
+      </div>
+      <div *ngIf="formGroup.get('password').errors?.maxlength" class="alert alert-danger" role="alert">
+        Se ha excedido de caracteres permitidos
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button 
+        type="submit" 
+        class="btn btn-primary"
+        [disabled]="formGroup.invalid"
+    >
+        Login
+    </button>
   </form>

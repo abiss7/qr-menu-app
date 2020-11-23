@@ -29,8 +29,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async signIn() {
+  async signIn(event) {
 
+    console.log(this.formGroup);
+    event.preventDefault();
     if ( this.formGroup.valid ) {
 
       const userName = this.formGroup.value.username;
@@ -51,10 +53,12 @@ export class LoginComponent implements OnInit {
         const resp = await this.securityService.login( userName, password );
 
         Swal.close();
-        // Redirect
+        this.router.navigate(['/menu']);
+
       } catch (err) {
 
         Swal.fire('Problemas', err.error, 'error');
+        this.formGroup.reset();
       }
     }
   }
