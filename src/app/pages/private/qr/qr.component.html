@@ -1,1 +1,10 @@
-<p>qr works!</p>
+<div class="row">
+    <div class="col-12">
+        <div *ngIf="fileQr" class="card" style="width: 18rem;">
+            <img [src]="fileQr.url" class="card-img-top" [alt]="fileQr.name">
+            <div class="card-body">
+              <a [href]="fileQr.url" class="btn btn-primary">Descargar QR</a>
+            </div>
+          </div>
+    </div>
+</div>

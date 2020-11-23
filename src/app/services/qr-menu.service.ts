@@ -38,12 +38,16 @@ export class QrMenuService {
 
           const mapper = resp.map((file: any) => ({
             ...file,
-            url: `${this.baseUrl}/files/${file.name}`,
             type: FileHelper.isPdf(file) ? 'pdf' : 'img'
           }));
 
           return mapper;
         })
       );
+  }
+
+  getQr(): Observable<any> {
+
+    return this.http.get(`${this.baseUrl}/qr`);
   }
 }

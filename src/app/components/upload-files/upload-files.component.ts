@@ -39,7 +39,7 @@ export class UploadFilesComponent implements OnInit {
   uploadFiles() {
     
     this.message = '';
-    if ( this.selectedFiles !== undefined ) {
+    if ( this.selectedFiles !== undefined && this.selectedFiles.length > 0 ) {
 
       if (!FileHelper.isFileAvailable(this.selectedFiles)) {
 
@@ -58,15 +58,33 @@ export class UploadFilesComponent implements OnInit {
 
     this.progressInfos[idx] = { value: 0, fileName: file.name };
   
+    Swal.fire({
+        title: 'Cargando...',
+        text: 'Por favor espera...',
+        allowOutsideClick: false,
+        onBeforeOpen: () => {
+
+            Swal.showLoading();
+        }
+    });
+
     this.qrMenuService.upload(file).subscribe(
       (event: any) => {
+        
         if (event.type === HttpEventType.UploadProgress) {
+          
           this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
+        } 
+        else if (event instanceof HttpResponse) {
+
           this.fileInfos = this.qrMenuService.getFiles();
+          this.clearInputFile();
+          Swal.fire('Subida correctamente!!!', 'La carga se ha realizado con éxito', 'success');
         }
+
       },
       err => {
+
         this.progressInfos[idx].value = 0;
         this.message = 'No se pudo subir el archivo' + file.name;
         Swal.fire('Problemas al subir el archivo!!!', 'No se pudo subir el archivo: ' + file.name + '. \nAsegúrese de tener conexión a Internet', 'error');

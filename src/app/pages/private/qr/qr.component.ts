@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+// Services
+import { QrMenuService } from '../../../services/qr-menu.service';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-qr',
   templateUrl: './qr.component.html',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QrComponent implements OnInit {
 
-  constructor() { }
+  fileQr: Observable<any> | undefined;
+
+  constructor(
+    private qrMenuService: QrMenuService
+  ) { }
 
   ngOnInit(): void {
+
+    this.qrMenuService.getQr()
+      .subscribe( qr => {
+
+        this.fileQr = qr;
+      });
   }
 
 }
