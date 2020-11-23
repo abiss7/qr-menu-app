@@ -21,7 +21,7 @@ import { HeaderComponent } from './components/header/header.component';
     AppRoutingModule,
     PrivatePageModule,
     PublicPageModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

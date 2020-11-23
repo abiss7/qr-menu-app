@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Routes
 import { PublicRoutingModule } from './public-routing.module';
@@ -19,6 +20,7 @@ import { MenuClientComponent } from '../public/menu-client/menu-client.component
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     PublicRoutingModule
   ]
 })

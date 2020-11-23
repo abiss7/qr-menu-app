@@ -15,7 +15,7 @@ import { QrComponent } from '../private/qr/qr.component';
   declarations: [
     MenuComponent,
     QrComponent,
-    UploadFilesComponent
+    UploadFilesComponent,
   ],
   exports: [
     MenuComponent,
