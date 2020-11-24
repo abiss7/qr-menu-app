@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class QrComponent implements OnInit {
 
-  fileQr: Observable<any> | undefined;
+  fileQr: any;
 
   constructor(
     private qrMenuService: QrMenuService

@@ -9,7 +9,7 @@ const routes: Routes = [
   { 
     path: '', 
     loadChildren: () => import('./pages/private/private-page.module').then(m => m.PrivatePageModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   { path: 'public', loadChildren: () => import('./pages/public/public-page.module').then(m => m.PublicPageModule) },
   { path: '**', redirectTo: 'menu' }

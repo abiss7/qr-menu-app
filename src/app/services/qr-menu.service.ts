@@ -5,13 +5,14 @@ import { map } from 'rxjs/operators';
 
 // Herlpers
 import { FileHelper } from '../helpers';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QrMenuService {
 
-  private baseUrl = 'http://localhost:5000';
+  private baseUrl = environment.baseUrl;
 
   constructor(
     private http: HttpClient

@@ -31,12 +31,12 @@ export class UploadFilesComponent implements OnInit {
     this.fileInfos = this.qrMenuService.getFiles();
   }
 
-  selectFiles(event: { target: { files: FileList | undefined; }; }) {
+  selectFiles(event: any) {
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
   }
 
-  uploadFiles() {
+  uploadFiles(event: any) {
     
     this.message = '';
     if ( this.selectedFiles !== undefined && this.selectedFiles.length > 0 ) {
@@ -94,6 +94,9 @@ export class UploadFilesComponent implements OnInit {
 
   private clearInputFile() {
     
-    this.inputFile?.nativeElement.value = '';
+    if ( this.inputFile ) {
+
+      this.inputFile.nativeElement.value = '';
+    }
   }
 }

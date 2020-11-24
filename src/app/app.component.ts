@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   subscription: Subscription | undefined;
 
   constructor(
-    private securityService: SecurityService
+    public securityService: SecurityService
   ) {}
 
   ngOnInit(): void {

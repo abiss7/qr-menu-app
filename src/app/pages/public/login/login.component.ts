@@ -13,7 +13,7 @@ import { SecurityService } from '../../../services/security.service';
 })
 export class LoginComponent implements OnInit {
 
-  formGroup: FormGroup;
+  formGroup: FormGroup | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async signIn(event) {
+  async signIn(event: { preventDefault: () => void; }) {
 
     console.log(this.formGroup);
     event.preventDefault();
-    if ( this.formGroup.valid ) {
+    if ( this.formGroup?.valid ) {
 
       const userName = this.formGroup.value.username;
       const password = this.formGroup.value.password;
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       } catch (err) {
 
         Swal.fire('Problemas', err.error, 'error');
-        this.formGroup.reset();
+        this.formGroup?.reset();
       }
     }
   }
