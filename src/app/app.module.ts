@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,9 @@ import { PublicPageModule } from './pages/public/public-page.module';
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+
+// Interceptors
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,13 @@ import { HeaderComponent } from './components/header/header.component';
     PublicPageModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

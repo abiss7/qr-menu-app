@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 // Services
 import { SecurityService } from './services/security.service';
@@ -11,7 +11,7 @@ import { SecurityService } from './services/security.service';
 })
 export class AppComponent implements OnInit {
 
-  isAuthenticated: Observable<boolean> | undefined;
+  subscription: Subscription | undefined;
 
   constructor(
     private securityService: SecurityService
@@ -19,6 +19,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.isAuthenticated = this.securityService.isAuthenticated();
+    this.subscription = this.securityService.isAuthenticated();
+  }
+
+  ngOnDestroy(): void {
+    
+    if (this.subscription) {
+
+      this.subscription.unsubscribe();
+    }
+    
   }
 }

@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if ( this.securityService.authenticated ) {
+
+      this.router.navigate(['/menu']);
+    }
+
     this.formGroup = this.formBuilder.group({
       username: [ '', [ Validators.required, Validators.maxLength(20) ] ],
       password: [ '', [ Validators.required, Validators.maxLength(20) ] ]

@@ -1,4 +1,4 @@
-<app-header *ngIf="isAuthenticated | async"></app-header>
+<app-header *ngIf="securityService.authenticated"></app-header>
 
 <div class="container">
     <router-outlet></router-outlet>
