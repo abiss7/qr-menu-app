@@ -21,6 +21,7 @@
     "@angular/router": "~11.0.1",
     "bootstrap": "^4.5.3",
     "jquery-slim": "^3.0.0",
+    "ng2-pdf-viewer": "^6.3.2",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.10.1",
     "tslib": "^2.0.0"

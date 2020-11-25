@@ -31,7 +31,7 @@ export class SecurityService {
       const resp = await this.http.post<any>(`${this.baseUrl}/security/login`, {username, password}).toPromise();
       localStorage.setItem('token', resp.metadata.token);
       this.authenticated = true;
-debugger;
+
     } catch (error) {
 
       throw error.error;

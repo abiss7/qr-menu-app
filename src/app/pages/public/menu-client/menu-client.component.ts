@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuClientComponent implements OnInit {
 
+  src = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,11 +27,13 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
     }
-
+    
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
 
-        if (err.status === 401) {
+        const path = window.location.href;
+
+        if (err.status === 401 && path.indexOf('/client') === -1) {
           this.router.navigateByUrl('public/login');
         }
 

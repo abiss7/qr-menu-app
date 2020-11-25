@@ -24,7 +24,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     AppRoutingModule,
     PrivatePageModule,
     PublicPageModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     {

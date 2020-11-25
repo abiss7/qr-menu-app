@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    
     if ( this.securityService.authenticated ) {
 
       this.router.navigate(['/menu']);
