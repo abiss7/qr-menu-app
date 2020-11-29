@@ -46,14 +46,15 @@ export class LoginComponent implements OnInit {
       try {
         
         Swal.fire({
-          title: 'Cargando...',
-          text: 'Por favor espere...',
-          allowOutsideClick: false,
-          onBeforeOpen: () => {
+            title: 'Cargando...',
+            text: 'Por favor espere...',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            onBeforeOpen: () => {
 
-              Swal.showLoading();
-          }
-      });
+                Swal.showLoading();
+            }
+        });
 
         const resp = await this.securityService.login( userName, password );
 

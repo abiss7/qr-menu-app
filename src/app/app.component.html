@@ -1,5 +1,7 @@
-<app-header *ngIf="securityService.authenticated"></app-header>
-
-<div class="container">
-    <router-outlet></router-outlet>
+<div *ngIf="!showBloqueo">
+    <app-header *ngIf="showHeader()"></app-header>
+    
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
 </div>
