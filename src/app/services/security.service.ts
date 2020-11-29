@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+// Helpers
+import { SecurityHelper } from '../helpers/security.helper';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,13 +18,15 @@ export class SecurityService {
     private http: HttpClient
   ) { }
 
-  isAuthenticated(): Subscription {
+  isAuthenticated(): boolean {
 
-    return this.http.get<boolean>(`${this.baseUrl}/security/auth`)
-      .subscribe((auth: boolean) => {
-
-        this.authenticated = auth;
-      });
+    const expired = SecurityHelper.expiredToken();
+    if ( expired ) {
+      localStorage.removeItem('token');
+      this.authenticated = false;
+    }
+    
+    return !expired;
   }
 
   async login( username: string, password: string ): Promise<any> {
@@ -29,11 +34,13 @@ export class SecurityService {
     try {
       
       const resp = await this.http.post<any>(`${this.baseUrl}/security/login`, {username, password}).toPromise();
-      localStorage.setItem('token', resp.metadata.token);
+      localStorage.setItem('token', JSON.stringify(resp.metadata));
       this.authenticated = true;
 
+      return resp.metadata;
     } catch (error) {
 
+      this.authenticated = false;
       throw error.error;
     }
   }

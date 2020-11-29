@@ -16,14 +16,15 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token = localStorage.getItem('token');
+    const metadata = localStorage.getItem('token');
+    const tokenMetadata = metadata != null ? JSON.parse(metadata) : '';
 
     let request = req;
 
-    if (token) {
+    if (tokenMetadata !== '') {
       request = req.clone({
         setHeaders: {
-          authorization: `Bearer ${ token }`
+          authorization: `Bearer ${ tokenMetadata.token }`
         }
       });
     }

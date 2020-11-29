@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { setTheme } from 'ngx-bootstrap/utils';
 import Swal from 'sweetalert2';
 import { environment } from '../environments/environment';
 
 // Services
 import { SecurityService } from './services/security.service';
-import { Router } from '@angular/router';
+
+// Helpers
+import { SecurityHelper } from './helpers/security.helper';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  subscription: Subscription | undefined;
   showBloqueo = false;
 
   constructor(
@@ -26,6 +27,19 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if (!SecurityHelper.expiredToken()) {
+
+      const token = SecurityHelper.getToken();
+      SecurityHelper.checkSession(1000, 2000, token.expireIn);
+    }
+
+    this.router.events.subscribe((event: any) => {
+      if (event.navigationTrigger === 'popstate') {
+
+        return;
+      }
+    });
 
     // Si viene del cliente
     if (window.location.href.indexOf('public/client') >= 0) {
@@ -44,21 +58,10 @@ export class AppComponent implements OnInit {
         this.showBloqueo = true;
       }
       else {
+
         this.router.navigate([`public/client/${environment.publicKey}`]);
       }
 
-    }
-    else {
-
-      this.subscription = this.securityService.isAuthenticated();
-    }
-  }
-
-  ngOnDestroy(): void {
-
-    if (this.subscription) {
-
-      this.subscription.unsubscribe();
     }
   }
 
@@ -71,6 +74,6 @@ export class AppComponent implements OnInit {
 
   showHeader(): boolean {
 
-    return this.securityService.authenticated;
+    return this.securityService.isAuthenticated();
   }
 }

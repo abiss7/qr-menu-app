@@ -14,7 +14,6 @@ import { QrMenuService } from 'src/app/services/qr-menu.service';
 })
 export class MenuClientComponent implements OnInit {
 
-  src = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   filesPdf: any[] = [];
   filesImg: any[] = [];
 
@@ -41,7 +40,21 @@ export class MenuClientComponent implements OnInit {
         this.filesPdf = files.filter(f => FileHelper.isPdf(f));
         this.filesImg = files.filter(f => !FileHelper.isPdf(f));
 
-        Swal.close();
+        if ( this.filesPdf.length === 0 &&  this.filesImg.length === 0) {
+
+          Swal.fire({
+            title: 'No hay Carta',
+            text: 'Por favor, pida que carguen la misma y luego vuelva a escanear el QR',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            icon: 'question'
+          });
+        }
+        else {
+          
+          Swal.close();
+        }        
+
       }, error => {
 
         Swal.fire('Problemas', error.error, 'error');

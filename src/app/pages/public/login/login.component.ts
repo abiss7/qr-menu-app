@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+// Helpers
+import { SecurityHelper } from '../../../helpers/security.helper';
+
 // Services
 import { SecurityService } from '../../../services/security.service';
 
@@ -36,7 +39,6 @@ export class LoginComponent implements OnInit {
 
   async signIn(event: { preventDefault: () => void; }) {
 
-    console.log(this.formGroup);
     event.preventDefault();
     if ( this.formGroup?.valid ) {
 
@@ -57,6 +59,7 @@ export class LoginComponent implements OnInit {
         });
 
         const resp = await this.securityService.login( userName, password );
+        SecurityHelper.checkSession(1000, 2000, resp.expireIn);
 
         Swal.close();
         this.router.navigate(['/menu']);
