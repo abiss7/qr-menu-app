@@ -16,7 +16,9 @@ export const SecurityHelper = {
 
                     subcription.unsubscribe();
                     localStorage.removeItem('token');
-                    window.location.href = `${window.origin}${environment.pathGit}/public/login`;
+                    
+                    // window.location.href = `${window.origin}${environment.pathGit}/public/login`;
+                    window.location.href = `${window.origin}/public/login`;
                 }
             });
     },

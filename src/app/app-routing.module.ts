@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-// Guards
-import { AuthGuard } from './guards/auth.guard';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   
   { 
     path: '', 
     loadChildren: () => import('./pages/private/private-page.module').then(m => m.PrivatePageModule),
-    // canActivate: [AuthGuard]
   },
   { path: 'public', loadChildren: () => import('./pages/public/public-page.module').then(m => m.PublicPageModule) },
   { path: '**', redirectTo: 'menu' }
@@ -17,6 +14,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: false })],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: PathLocationStrategy
+    }
+  ]
 })
 export class AppRoutingModule { }

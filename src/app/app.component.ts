@@ -74,6 +74,7 @@ export class AppComponent implements OnInit {
 
   showHeader(): boolean {
 
-    return this.securityService.isAuthenticated();
+    const path = window.location.href;
+    return path.indexOf('public') === -1;
   }
 }
