@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 
 // Services
 import { SecurityService } from './services/security.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
   showBloqueo = false;
 
   constructor(
-    public securityService: SecurityService
+    public securityService: SecurityService,
+    private router: Router
   ) {
     setTheme('bs4');
   }
@@ -40,6 +42,9 @@ export class AppComponent implements OnInit {
         );
 
         this.showBloqueo = true;
+      }
+      else {
+        this.router.navigate([`public/client/${environment.publicKey}`]);
       }
 
     }
