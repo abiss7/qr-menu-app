@@ -19,7 +19,7 @@ export class UploadFilesComponent implements OnInit {
   message = '';
   @ViewChild('inputFile') inputFile: ElementRef | undefined;
 
-  fileInfos: {name: string, url: string }[] = [];
+  fileInfos: {name: string, url: string, type: string }[] = [];
 
   constructor(
     private qrMenuService: QrMenuService
@@ -28,7 +28,7 @@ export class UploadFilesComponent implements OnInit {
   ngOnInit(): void {
 
     this.qrMenuService.getFiles()
-      .subscribe((files: {name: string, url: string }[]) => {
+      .subscribe((files: {name: string, url: string, type: string }[]) => {
 
         this.fileInfos = files;
       });
@@ -144,7 +144,7 @@ export class UploadFilesComponent implements OnInit {
         else if (event instanceof HttpResponse) {
 
           this.qrMenuService.getFiles()
-            .subscribe((files: {name: string, url: string }[]) => {
+            .subscribe((files: {name: string, url: string, type: string }[]) => {
 
               this.fileInfos = files;
               this.clearInputFile();

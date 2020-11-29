@@ -28,12 +28,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (!SecurityHelper.expiredToken()) {
-
-      const token = SecurityHelper.getToken();
-      SecurityHelper.checkSession(1000, 2000, token.expireIn);
-    }
-
     this.router.events.subscribe((event: any) => {
       if (event.navigationTrigger === 'popstate') {
 
@@ -62,6 +56,15 @@ export class AppComponent implements OnInit {
         this.router.navigate([`public/client/${environment.publicKey}`]);
       }
 
+    }
+    else {
+
+      if (!SecurityHelper.expiredToken()) {
+
+        const token = SecurityHelper.getToken();
+        SecurityHelper.checkSession(1000, 2000, token.expireIn);
+        this.router.navigate([window.location.href.split('/').pop()]);
+      }
     }
   }
 

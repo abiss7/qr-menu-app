@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 // Services
 import { SecurityService } from '../services/security.service';
 
+// Helpers
+import { SecurityHelper } from '../helpers/security.helper';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,8 +24,11 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-      if ( !this.securityService.authenticated ) {
+      if ( !this.securityService.authenticated && SecurityHelper.expiredToken() ) {
         this.router.navigate(['public/login']);
+      }
+      else {
+        this.securityService.authenticated = true;
       }
 
       return this.securityService.authenticated;
