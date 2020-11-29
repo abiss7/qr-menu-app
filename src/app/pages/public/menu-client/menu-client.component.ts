@@ -28,8 +28,7 @@ export class MenuClientComponent implements OnInit {
       text: 'Por favor espere...',
       allowOutsideClick: false,
       showConfirmButton: false,
-      onBeforeOpen: () => {
-
+      willOpen: () => {
         Swal.showLoading();
       }
     });

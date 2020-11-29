@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { QrMenuService } from 'src/app/services/qr-menu.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
 import Swal from 'sweetalert2';
 
 // Helpers
 import { FileHelper } from '../../helpers';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-upload-files',
@@ -20,7 +19,7 @@ export class UploadFilesComponent implements OnInit {
   message = '';
   @ViewChild('inputFile') inputFile: ElementRef | undefined;
 
-  fileInfos: Observable<any> | undefined;
+  fileInfos: {name: string, url: string }[] = [];
 
   constructor(
     private qrMenuService: QrMenuService
@@ -28,7 +27,37 @@ export class UploadFilesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.fileInfos = this.qrMenuService.getFiles();
+    this.qrMenuService.getFiles()
+      .subscribe((files: {name: string, url: string }[]) => {
+
+        this.fileInfos = files;
+      });
+  }
+
+  checkCountPdfUpload(files: FileList): boolean {
+
+    let pdf = 0;
+    for (let i = 0; i < files.length; i++) {
+      
+      if ( FileHelper.isPdf(files[i])) {
+        pdf++;
+      }
+    }
+
+    return pdf <= environment.files.pdf;
+  }
+
+  checkCountImageUpload(files: FileList): boolean {
+
+    let image = 0;
+    for (let i = 0; i < files.length; i++) {
+      
+      if ( !FileHelper.isPdf(files[i])) {
+        image++;
+      }
+    }
+
+    return image <= environment.files.image;
   }
 
   selectFiles(event: any) {
@@ -41,6 +70,32 @@ export class UploadFilesComponent implements OnInit {
     this.message = '';
     if ( this.selectedFiles !== undefined && this.selectedFiles.length > 0 ) {
 
+      // Valido cantidad permitida de pdfs
+      if ( !this.checkCountPdfUpload(this.selectedFiles)) {
+
+        Swal.fire(
+          'Problemas al subir el archivo!!!', 
+          `Solamente puede cargar ${ environment.files.pdf } pdfs!`, 
+          'error'
+        );
+        this.clearInputFile();
+  
+        return;
+      }
+
+      // Valido cantidad permitida de imágenes
+      if ( !this.checkCountImageUpload(this.selectedFiles)) {
+
+        Swal.fire(
+          'Problemas al subir el archivo!!!', 
+          `Solamente puede cargar ${ environment.files.image } imágenes!`,
+          'error'
+        );
+        this.clearInputFile();
+  
+        return;
+      }
+
       if (!FileHelper.isFileAvailable(this.selectedFiles)) {
 
         Swal.fire('Archivo inválido', 'Solamente se permiten archivos de imagen o pdf!!!', 'error');
@@ -48,9 +103,21 @@ export class UploadFilesComponent implements OnInit {
         return;
       }
 
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        this.upload(i, this.selectedFiles[i]);
-      }
+      this.qrMenuService.clearFiles()
+        .subscribe(() => {
+
+          if ( this.selectedFiles !== undefined ) {
+
+            for (let i = 0; i < this.selectedFiles.length; i++) {
+              this.upload(i, this.selectedFiles[i]);
+            }
+          }
+        },
+        error => {
+
+          Swal.fire('Problemas', 'No se pudo preparar la subida correctamente!!', 'error');
+          this.clearInputFile();
+        });
     }
   }
 
@@ -62,9 +129,8 @@ export class UploadFilesComponent implements OnInit {
         title: 'Cargando...',
         text: 'Por favor espera...',
         allowOutsideClick: false,
-        onBeforeOpen: () => {
-
-            Swal.showLoading();
+        willOpen: () => {
+          Swal.showLoading();
         }
     });
 
@@ -77,9 +143,13 @@ export class UploadFilesComponent implements OnInit {
         } 
         else if (event instanceof HttpResponse) {
 
-          this.fileInfos = this.qrMenuService.getFiles();
-          this.clearInputFile();
-          Swal.fire('Subida correctamente!!!', 'La carga se ha realizado con éxito', 'success');
+          this.qrMenuService.getFiles()
+            .subscribe((files: {name: string, url: string }[]) => {
+
+              this.fileInfos = files;
+              this.clearInputFile();
+              Swal.fire('Subida correctamente!!!', 'La carga se ha realizado con éxito', 'success');
+            });            
         }
 
       },

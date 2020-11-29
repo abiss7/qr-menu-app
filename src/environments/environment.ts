@@ -7,7 +7,11 @@ export const environment = {
   baseUrl: 'http://localhost:5000',
   publicKey: 'eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik51ZXZvIFByb2dyZXNvIERlbGkiLCJpYXQiOjE1MTYyMzkwMjJ9', //Nuevo Progreso Deli
   //eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik51ZXZvIFByb2dyZXNvIGNhZmUiLCJpYXQiOjE1MTYyMzkwMjJ9 -> Nuevo Progreso Café
-  pathGit: '/'
+  pathGit: '/',
+  files: {
+    pdf: 2,
+    image: 10
+  }
 };
 
 /*

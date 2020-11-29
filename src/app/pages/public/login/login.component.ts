@@ -52,9 +52,8 @@ export class LoginComponent implements OnInit {
             text: 'Por favor espere...',
             allowOutsideClick: false,
             showConfirmButton: false,
-            onBeforeOpen: () => {
-
-                Swal.showLoading();
+            willOpen: () => {
+              Swal.showLoading();
             }
         });
 

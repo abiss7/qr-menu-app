@@ -51,4 +51,9 @@ export class QrMenuService {
 
     return this.http.get(`${this.baseUrl}/qr`);
   }
+
+  clearFiles(): Observable<any> {
+
+    return this.http.delete(`${this.baseUrl}/files-clear`);
+  }
 }
