@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { SecurityService } from '../services/security.service';
 
 // Helpers
-import { SecurityHelper } from '../helpers/security.helper';
+import { SecurityHelper, RouteHelper } from '../helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,7 @@ export class AuthGuard implements CanActivate {
       
       if ( !this.securityService.authenticated && SecurityHelper.expiredToken() ) {
         this.router.navigate(['public/login']);
+        //this.router.navigate([`${RouteHelper.getNavigateRoot()}/public/login`]);
       }
       else {
         this.securityService.authenticated = true;

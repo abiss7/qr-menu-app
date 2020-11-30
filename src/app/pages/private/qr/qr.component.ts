@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 // Services
 import { QrMenuService } from '../../../services/qr-menu.service';
 
+// Helpers
+import { RouteHelper } from 'src/app/helpers';
+
 @Component({
   selector: 'app-qr',
   templateUrl: './qr.component.html',
@@ -22,7 +25,8 @@ export class QrComponent implements OnInit {
 
     if ( localStorage.getItem('token') == null ) {
 
-      this.router.navigate(['public/login']);
+      // this.router.navigate(['public/login']);
+      this.router.navigate([`${RouteHelper.getNavigateRoot()}/public/login`]);
     }
 
     this.qrMenuService.getQr()

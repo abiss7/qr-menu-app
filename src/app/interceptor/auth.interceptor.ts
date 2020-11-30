@@ -4,6 +4,9 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
+// Helpers
+import { RouteHelper } from '../helpers';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,7 +38,8 @@ export class AuthInterceptor implements HttpInterceptor {
         const path = window.location.href;
 
         if (err.status === 401 && path.indexOf('/client') === -1) {
-          this.router.navigateByUrl('public/login');
+          // this.router.navigateByUrl('public/login');
+          this.router.navigate([`${RouteHelper.getNavigateRoot()}/public/login`]);
         }
 
         return throwError( err );

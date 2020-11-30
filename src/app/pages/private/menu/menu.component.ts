@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Helpers
+import { RouteHelper } from 'src/app/helpers';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -16,7 +19,8 @@ export class MenuComponent implements OnInit {
     
     if ( localStorage.getItem('token') == null ) {
 
-      this.router.navigate(['public/login']);
+      // this.router.navigate(['public/login']);
+      this.router.navigate([`${RouteHelper.getNavigateRoot()}/public/login`]);
     }
   }
 

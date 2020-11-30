@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 // Helpers
-import { SecurityHelper } from '../../../helpers/security.helper';
+import { SecurityHelper, RouteHelper } from '../../../helpers';
 
 // Services
 import { SecurityService } from '../../../services/security.service';

@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 import { SecurityService } from './services/security.service';
 
 // Helpers
-import { SecurityHelper } from './helpers/security.helper';
+import { SecurityHelper, RouteHelper } from './helpers';
 
 @Component({
   selector: 'app-root',
@@ -63,7 +63,8 @@ export class AppComponent implements OnInit {
 
         const token = SecurityHelper.getToken();
         SecurityHelper.checkSession(1000, 2000, token.expireIn);
-        this.router.navigate([window.location.href.split('/').pop()]);
+        // this.router.navigate([window.location.href.split('/').pop()]);
+        this.router.navigate([`${RouteHelper.getNavigateRoot()}${window.location.href.split('/').pop()}`]);
       }
     }
   }
