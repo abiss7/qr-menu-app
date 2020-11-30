@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/fonts/Cairo.css"
             ],
             "scripts": [
               "node_modules/jquery-slim/dist/jquery.slim.js",
