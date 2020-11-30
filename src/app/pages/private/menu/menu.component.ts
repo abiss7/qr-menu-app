@@ -19,7 +19,6 @@ export class MenuComponent implements OnInit {
     
     if ( localStorage.getItem('token') == null ) {
 
-      // this.router.navigate(['public/login']);
       this.router.navigate([`${RouteHelper.getNavigateRoot()}/public/login`]);
     }
   }

@@ -63,7 +63,6 @@ export class AppComponent implements OnInit {
 
         const token = SecurityHelper.getToken();
         SecurityHelper.checkSession(1000, 2000, token.expireIn);
-        // this.router.navigate([window.location.href.split('/').pop()]);
         this.router.navigate([`${RouteHelper.getNavigateRoot()}${window.location.href.split('/').pop()}`]);
       }
     }
