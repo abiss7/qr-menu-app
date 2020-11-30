@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment.prod';
 @Component({
   selector: 'app-upload-files',
   templateUrl: './upload-files.component.html',
-  styleUrls: ['./upload-files.component.css']
+  styleUrls: ['./upload-files.component.scss']
 })
 export class UploadFilesComponent implements OnInit {
 
@@ -129,6 +129,7 @@ export class UploadFilesComponent implements OnInit {
         title: 'Cargando...',
         text: 'Por favor espera...',
         allowOutsideClick: false,
+        showConfirmButton: false,
         willOpen: () => {
           Swal.showLoading();
         }

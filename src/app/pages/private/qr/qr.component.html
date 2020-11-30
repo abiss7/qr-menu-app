@@ -1,10 +1,12 @@
-<div class="row">
-    <div class="col-12">
-        <div *ngIf="fileQr" class="card" style="width: 18rem;">
-            <img [src]="fileQr.url" class="card-img-top" [alt]="fileQr.name">
-            <div class="card-body">
-              <a [href]="fileQr.url" class="btn btn-primary">Descargar QR</a>
+<div class="qr mt-5">
+  <div class="row justify-content-center">
+      <div class="col-6">
+          <div *ngIf="fileQr" class="card">
+              <img [src]="fileQr.url" class="card-img-top" [alt]="fileQr.name">
+              <div class="card-body">
+                <a [href]="fileQr.url" class="btn btn-primary">Descargar QR</a>
+              </div>
             </div>
-          </div>
-    </div>
+      </div>
+  </div>
 </div>

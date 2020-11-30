@@ -7,7 +7,7 @@ import { SecurityService } from '../../services/security.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
@@ -22,6 +22,6 @@ export class HeaderComponent implements OnInit {
   logout() {
 
     this.securityService.logout();
-    this.router.navigate(['/public/login']);
+    this.router.navigate(['public/login']);
   }
 }

@@ -24,6 +24,7 @@
     "ng2-pdf-viewer": "^6.3.2",
     "ngx-bootstrap": "^6.2.0",
     "rxjs": "~6.6.0",
+    "sass": "^1.29.0",
     "sweetalert2": "^10.10.1",
     "tslib": "^2.0.0"
   },
