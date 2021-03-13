@@ -6,5 +6,11 @@ export const environment = {
   files: {
     pdf: 2,
     image: 10
+  },
+  cloudinary: {
+    cloud_name: 'dfzcljabo',
+    upload_preset: 'qr-menu-app',
+    api_key: '981358926238223',
+    api_secret: '3fgffH_OtruyNy-p4tz0f35P8DA'
   }
 };
