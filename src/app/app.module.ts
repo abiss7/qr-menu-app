@@ -2,8 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CloudinaryModule } from '@cloudinary/angular-5.x';
-import * as  Cloudinary from 'cloudinary-core';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -29,8 +27,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     PrivatePageModule,
     PublicPageModule,
-    HttpClientModule,
-    CloudinaryModule.forRoot(Cloudinary, { cloud_name: environment.cloudinary.cloud_name }),
+    HttpClientModule
   ],
   providers: [
     {

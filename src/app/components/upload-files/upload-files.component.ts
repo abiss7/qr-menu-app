@@ -135,7 +135,7 @@ export class UploadFilesComponent implements OnInit {
         }
     });
 
-    this.qrMenuService.upload2(file).subscribe(
+    this.qrMenuService.upload(file).subscribe(
       (event: any) => {
         
         if (event.type === HttpEventType.UploadProgress) {
