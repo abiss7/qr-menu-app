@@ -35,6 +35,13 @@ export class AppComponent implements OnInit {
       }
     });
 
+    const accessForQr = localStorage.getItem('qrUrl');
+    if ( accessForQr ) {
+
+      this.router.navigateByUrl(accessForQr);
+      return;
+    }
+
     // Si viene del cliente
     if (window.location.href.indexOf('public/client') >= 0) {
 

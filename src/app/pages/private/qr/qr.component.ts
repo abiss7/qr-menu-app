@@ -25,7 +25,7 @@ export class QrComponent implements OnInit {
 
     if ( localStorage.getItem('token') == null ) {
 
-      this.router.navigate([`${RouteHelper.getNavigateRoot()}/public/login`]);
+      this.router.navigate([`${RouteHelper.getNavigateRoot()}/login`]);
     }
 
     this.qrMenuService.getQr()

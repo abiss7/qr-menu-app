@@ -38,7 +38,7 @@ export class AuthInterceptor implements HttpInterceptor {
         const path = window.location.href;
 
         if (err.status === 401 && path.indexOf('/client') === -1) {
-          this.router.navigate([`${RouteHelper.getNavigateRoot()}/public/login`]);
+          this.router.navigate([`${RouteHelper.getNavigateRoot()}/login`]);
         }
 
         return throwError( err );
