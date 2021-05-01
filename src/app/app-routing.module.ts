@@ -6,7 +6,7 @@ const routes: Routes = [];
 
 if ( window.location.href.indexOf('public/client') >= 0 ) {
 
-  localStorage.setItem('qrUrl', `public${window.location.href.split('public')[1]}`);
+  localStorage.setItem('qrUrl', `#/public${window.location.href.split('public')[1]}`);
   routes.push(
     { 
       path: 'public', 
