@@ -14,7 +14,6 @@ import { HeaderComponent } from './components/header/header.component';
 
 // Interceptors
 import { AuthInterceptor } from './interceptor/auth.interceptor';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [

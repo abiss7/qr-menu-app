@@ -9,7 +9,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/private/private-page.module').then(m => m.PrivatePageModule),
   },
   { path: 'public', loadChildren: () => import('./pages/public/public-page.module').then(m => m.PublicPageModule) },
-  { path: '**', redirectTo: 'menu' }
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
