@@ -10,7 +10,8 @@ const routes: Routes = [
   
   { path: '', component: MenuComponent, canActivate: [AuthGuard] },
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
-  { path: 'qr', component: QrComponent, canActivate: [AuthGuard] }
+  { path: 'qr', component: QrComponent, canActivate: [AuthGuard] },
+  // { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

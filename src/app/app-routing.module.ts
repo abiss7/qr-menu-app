@@ -6,9 +6,12 @@ const routes: Routes = [
   
   { 
     path: '', 
-    loadChildren: () => import('./pages/private/private-page.module').then(m => m.PrivatePageModule),
+    loadChildren: () => import('./pages/private/private-page.module').then(m => m.PrivatePageModule)
   },
-  { path: 'public', loadChildren: () => import('./pages/public/public-page.module').then(m => m.PublicPageModule) },
+  { 
+    path: 'public', 
+    loadChildren: () => import('./pages/public/public-page.module').then(m => m.PublicPageModule)
+  },
   { path: '**', redirectTo: '/' }
 ];
 
