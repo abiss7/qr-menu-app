@@ -7,10 +7,9 @@ import { MenuClientComponent } from '../public/menu-client/menu-client.component
 
 const routes: Routes = [
   
-  { path: '', component: MenuClientComponent },
-  // { path: 'login', component: LoginComponent },
-  { path: 'client/:key', component: MenuClientComponent },
-  { path: '**', redirectTo: '/' }
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'client/:key', component: MenuClientComponent }
 ];
 
 @NgModule({
