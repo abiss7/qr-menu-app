@@ -48,16 +48,20 @@ export class MenuClientComponent implements OnInit {
             showConfirmButton: false,
             icon: 'question'
           });
-        }
-        else {
-          
-          Swal.close();
         }        
 
       }, error => {
 
         Swal.fire('Problemas', error.error, 'error');
       });
+  }
+
+  showGif( event: any ) {
+
+    if ( event.loaded === event.total ) {
+      
+      Swal.close();
+    }
   }
 
 }

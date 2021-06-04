@@ -27,10 +27,21 @@ export class UploadFilesComponent implements OnInit {
 
   ngOnInit(): void {
 
+    Swal.fire({
+      title: 'Cargando...',
+      text: 'Por favor espere...',
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
     this.qrMenuService.getFiles()
       .subscribe((files: {name: string, url: string, type: string }[]) => {
 
         this.fileInfos = files;
+        Swal.close();
       });
   }
 

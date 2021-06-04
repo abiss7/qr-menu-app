@@ -10,10 +10,11 @@
   
         <div class="pdf-container" *ngFor="let pdf of filesPdf; let i = index" class="mt-5">
   
-          <accordion>
+          <accordion [isAnimated]="true">
             <accordion-group [isOpen]="i === 0" [heading]="pdf.name | cutExtension">
               <pdf-viewer [src]="pdf.url"
                           [original-size]="false"
+                          (on-progress)="showGif($event)"
               ></pdf-viewer>
             </accordion-group>
           </accordion>
@@ -24,7 +25,7 @@
       <tab *ngIf="filesImg.length > 0" heading="IMAGEN" class="mt-5">
   
         <div *ngFor="let image of filesImg; let i = index" class="mt-5">
-          <accordion>
+          <accordion [isAnimated]="true">
             <accordion-group [isOpen]="i === 0" [heading]="image.name | cutExtension">
               <img [src]="image.url" class="d-block w-100" [alt]="image.name">            
             </accordion-group>
